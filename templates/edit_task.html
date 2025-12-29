@@ -5,18 +5,36 @@
 
 {% block content %}
 <div class="container py-5">
-    <h3 class="pt-5 pb-5 text-center">Edit Task</h3>
-    <form action="{% url 'edit_task' get_task.pk %}" method="POST" style="width: 500px; margin: auto;">
-        {% csrf_token %}
-        <div class="form-group">
-            <span style="display: flex;">
-                <input type="text" name="task" class="form-control" placeholder="Edit your task"
-                    value="{{ get_task.task }}">
-                <button type="submit" class="btn btn-primary" style="width: 200px;">
-                    <i class="fa fa-pencil"></i> Update
-                </button>
-            </span>
+    <!-- Header Section -->
+    <div class="header-section text-center mb-5">
+        <h1 class="app-title">Edit Task</h1>
+        <p class="text-muted">Update your task details</p>
+    </div>
+
+    <!-- Edit Form Card -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="edit-task-card">
+                <form action="{% url 'edit_task' get_task.pk %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group mb-4">
+                        <label for="taskInput" class="form-label">Task Description</label>
+                        <input type="text" id="taskInput" name="task" class="form-control task-input"
+                            placeholder="Enter your task" value="{{ get_task.task }}" required autofocus>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                            <i class="fa fa-times"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check"></i> Update Task
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
 {% endblock %}

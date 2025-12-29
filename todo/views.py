@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from todo.models import Task
 
-# Create your views here.
 def add_task(request):
     task = request.POST['task']
     Task.objects.create(task=task)
@@ -35,3 +34,9 @@ def edit_task(request, pk):
             'get_task' : get_task
         }
         return render(request, 'edit_task.html', context)
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('home')
+    
